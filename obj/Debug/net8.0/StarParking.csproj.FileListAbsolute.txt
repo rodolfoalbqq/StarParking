@@ -12,3 +12,4 @@ C:\Projetos\StarParking\StarParking\obj\Debug\net8.0\refint\StarParking.dll
 C:\Projetos\StarParking\StarParking\obj\Debug\net8.0\StarParking.pdb
 C:\Projetos\StarParking\StarParking\obj\Debug\net8.0\StarParking.genruntimeconfig.cache
 C:\Projetos\StarParking\StarParking\obj\Debug\net8.0\ref\StarParking.dll
+C:\Projetos\StarParking\StarParking\obj\Debug\net8.0\StarParking.sourcelink.json

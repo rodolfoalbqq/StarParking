@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StarParking")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e6b24d0ff7c49f64991ad216336ae2bf9ddd2aa1")]
 [assembly: System.Reflection.AssemblyProductAttribute("StarParking")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StarParking")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

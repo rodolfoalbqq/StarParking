@@ -5,7 +5,12 @@ using StarParking.models;
 decimal valorFixo = 0;
 decimal valorHora = 0;
 
-Console.WriteLine("Seja bem vindo ao Star Parking!");
+Console.WriteLine("Seja bem vindo ao Star Parking!\n" +
+  "Digite o valor do estacionamento");
+
+valorFixo = Convert.ToDecimal(Console.ReadLine());
+Console.WriteLine("Agora digite o preço por hora:");
+valorHora = Convert.ToDecimal(Console.ReadLine());
 
 
 Estacionamento es = new Estacionamento(valorFixo, valorHora);
