@@ -6,59 +6,75 @@ using System.Threading.Tasks;
 
 namespace StarParking.models
 {
-    public class Estacionamento
+    class Veiculo
     {
-        decimal valorFixo = 0;
-        decimal valorHora = 0;
-
-        private List<string> veiculos = new List<string>();
-
-        public Estacionamento(decimal valorFixo, decimal valorHora)
-        {
-            this.valorFixo = valorFixo;
-            this.valorHora = valorHora;
-
-        }
-        public void AdicionarVeiculo()
-        {
-            Console.WriteLine("Digite a placa do veículo");
-            veiculos.Add(Console.ReadLine());
-            Console.WriteLine("Veiculo adicionado com sucesso!");
-
+        public string Placa { get; set; }
+        public DateTime Entrada { get; set; }
     }
 
-        public void RemoverVeiculo()
+    public class Estacionamento
+    {
+        private List<Veiculo> veiculos;
+
+        public Estacionamento()
         {
-            Console.WriteLine("Digite a placa do veiculo");
-            string placa = Console.ReadLine();
+            veiculos = new List<Veiculo>();
+        }
 
-            if(veiculos.Any(x => x.ToUpper() == placa.ToUpper())) {
+        public void AdicionarVeiculo(string placa)
+        {
+            Veiculo novoVeiculo = new Veiculo
+            {
+                Placa = placa,
+                Entrada = DateTime.Now
+            };
 
-                Console.WriteLine("Digite a quantidade de horas");
-                decimal quantidadeHoras = Convert.ToDecimal(Console.ReadLine());
+            veiculos.Add(novoVeiculo);
+            Console.WriteLine($"Veículo {placa} adicionado ao estacionamento.");
 
-                decimal valorTotal = valorFixo + valorHora * quantidadeHoras;
+        }
 
-                veiculos.Remove(placa);
+        public void RemoverVeiculo(string placa)
+        {
+            Veiculo veiculo = veiculos.Find(v => v.Placa == placa);
 
-                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+            if (veiculo != null) 
+            {
+                DateTime saida = DateTime.Now;
+                TimeSpan duracao = saida - veiculo.Entrada;
+                double valorCobrado = CalcularValorCobrado(duracao);
+
+                Console.WriteLine($"Veículo {placa} removido do estacionamento.");
+                Console.WriteLine($"Tempo estacionado: {duracao.TotalHours} minutos.");
+                Console.WriteLine($"Valor cobrado: R$ {valorCobrado:F2}");
+
+                veiculos.Remove(veiculo);
             }
 
             else {
-                Console.WriteLine("Esse veículo não está estacionado aqui. Verifique se digitou a placa corretamente");
+                Console.WriteLine($"Veículo {placa} não encontrado no estacionamento.");
 
 
-                    }
+                  }
 
         }
 
         public void ListarVeiculos()
         {
-            foreach(string i in veiculos){
-
-                Console.WriteLine(i);
-
+            Console.WriteLine("Veículos estacionados:");
+            foreach (Veiculo veiculo in veiculos)
+            {
+                Console.WriteLine($"Placa: {veiculo.Placa}, Entrada: {veiculo.Entrada}");
             }
+        }
+
+        private double CalcularValorCobrado(TimeSpan duracao)
+        {
+            // Exemplo de cálculo simples. Você pode ajustar conforme necessário.
+            const double taxaHora = 5.0;
+            const int precoInicial = 5;
+            
+            return duracao.TotalHours * taxaHora + precoInicial;
         }
     }
 

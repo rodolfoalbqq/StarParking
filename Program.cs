@@ -1,57 +1,50 @@
 ﻿using StarParking;
 using StarParking.models;
 
-
-decimal valorFixo = 0;
-decimal valorHora = 0;
-
-Console.WriteLine("Seja bem vindo ao Star Parking!\n" +
-  "Digite o valor do estacionamento");
-
-valorFixo = Convert.ToDecimal(Console.ReadLine());
-Console.WriteLine("Agora digite o preço por hora:");
-valorHora = Convert.ToDecimal(Console.ReadLine());
-
-
-Estacionamento es = new Estacionamento(valorFixo, valorHora);
-
-string opcao = string.Empty;
-bool exibirMenu = true;
-
-while (exibirMenu)
+class Program
 {
-    Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar veículo");
-    Console.WriteLine("2 - Remover veículo");
-    Console.WriteLine("3 - Listar veículos");
-    Console.WriteLine("4 - Encerrar");
-
-    switch (Console.ReadLine())
+    static void Main()
     {
-        case "1":
-            es.AdicionarVeiculo();
-            break;
+        Estacionamento estacionamento = new Estacionamento();
 
-        case "2":
-            es.RemoverVeiculo();
-            break;
+        while (true)
+        {
+            Console.WriteLine("\nMenu:");
+            Console.WriteLine("1. Cadastrar veículo");
+            Console.WriteLine("2. Remover veículo");
+            Console.WriteLine("3. Listar veículos");
+            Console.WriteLine("4. Encerrar");
 
-        case "3":
-            es.ListarVeiculos();
-            break;
+            Console.Write("Escolha uma opção (1-4): ");
+            string escolha = Console.ReadLine();
 
-        case "4":
-            exibirMenu = false;
-            break;
+            switch (escolha)
+            {
+                case "1":
+                    Console.Write("Digite a placa do veículo: ");
+                    string placa = Console.ReadLine();
+                    estacionamento.AdicionarVeiculo(placa);
+                    break;
 
-        default:
-            Console.WriteLine("Opção inválida");
-            break;
+                case "2":
+                    Console.Write("Digite a placa do veículo a ser removido: ");
+                    placa = Console.ReadLine();
+                    estacionamento.RemoverVeiculo(placa);
+                    break;
+
+                case "3":
+                    estacionamento.ListarVeiculos();
+                    break;
+
+                case "4":
+                    Console.WriteLine("Encerrando o programa. Até logo!");
+                    return;
+
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    break;
+            }
+        }
     }
 
-    Console.WriteLine("Pressione uma tecla para continuar");
-    Console.ReadLine();
 }
-
-Console.WriteLine("O programa se encerrou");
